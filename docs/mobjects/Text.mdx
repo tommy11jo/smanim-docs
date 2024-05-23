@@ -1,0 +1,90 @@
+---
+sidebar_position: 4
+---
+
+# Text
+
+### Description
+
+The `Text` class, which inherits from `TransformableMobject`, represents a text object.
+It is the main way to display text in smanim and allows customization of text appearance and positioning.
+
+#### Constructor Parameters
+
+- `text` (str): The text to display.
+- `position` (Point3D, default=UL): Coordinates of the upper left corner.
+- `start_angle` (float, default=0): Starting angle in radians.
+- `color` (ManimColor, default=WHITE): Text color.
+- `opacity` (float, default=1.0): Text opacity.
+- `max_width` (float | None, default=6.0): Maximum width before text wrapping, in internal smanim units.
+- `z_index` (int, default=1): Z-index for layering.
+- `font_size` (float, default=DEFAULT_FONT_SIZE): Font size. Below are constants you can use.
+  - H1_FONT_SIZE = 40
+  - H2_FONT_SIZE = 30
+  - H3_FONT_SIZE = 24
+  - DEFAULT_FONT_SIZE = 20
+- `text_decoration` (Literal["none", "underline", "overline", "line-through"], default="none"): Text decoration.
+- `bold` (bool, default=False): Bold text.
+- `italics` (bool, default=False): Italicized text.
+- `x_padding` (float, default=0): Horizontal padding.
+- `y_padding` (float, default=0): Vertical padding.
+- `leading` (float, default=0.2): Line spacing as a percentage of line height.
+- `kwargs` (dict): Additional arguments for `TransformableMobject`.
+
+#### Attributes
+
+- `raw_text` (str): The raw text string.
+- `fill_color` (ManimColor): Text color.
+- `fill_opacity` (float): Text opacity.
+- `text_decoration` (Literal["none", "underline", "overline", "line-through"]): Text decoration.
+- `italics` (bool): Italicized text.
+- `bold` (bool): Bold text.
+- `font_path` (Path): Path to the font file.
+- `position` (Point3D): Upper left corner of the text bounding box.
+- `heading` (float): Text heading angle.
+
+### Examples
+
+#### Example 1
+
+Simple text label on a square
+
+```python
+from smanim import *
+
+square = Square(color=GRAY)
+text = Text("Square A", color=RED).next_to(square, UP, buff=TINY_BUFF)
+
+canvas.add(square, text)
+canvas.snapshot(preview=True, crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/text/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+Text with custom color, size, and styling
+
+```python
+from smanim import *
+
+text = Text(
+    text="Hello, world!",
+    color=RED,
+    font_size=H3_FONT_SIZE,
+    bold=True,
+    italics=True,
+)
+canvas.add(text)
+canvas.snapshot(preview=True, crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/text/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

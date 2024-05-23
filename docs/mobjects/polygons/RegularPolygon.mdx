@@ -1,0 +1,45 @@
+---
+sidebar_position: 2
+---
+
+# Regular Polygon
+
+### Description
+
+The `RegularPolygon` class, which inherits from `Polygon`, represents a regular polygon.
+The default drawing style for a regular polygon is a fill rather than a stroke.
+
+#### Constructor Parameters
+
+- `n` (int, default=6): Number of sides.
+- `radius` (int, default=1): Radius of the circumscribed circle.
+- `start_angle` (int | None, default=None): Starting angle in degrees.
+- `kwargs` (dict): Additional arguments for `Polygon`.
+  - `corner_radius` (float, default=0.0): Radius for rounding corners.
+
+#### Attributes
+
+- `n` (int): Number of sides.
+- `radius` (int): Radius of the circumscribed circle.
+- `start_angle` (int | None): Starting angle in radians (if provided).
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+
+### Examples
+
+#### Example 1
+
+An octagon, tilted at an angle.
+
+```python
+from smanim import *
+
+octagon = RegularPolygon(n=8, start_angle=PI / 16)
+canvas.add(octagon)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/regular-polygon/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>

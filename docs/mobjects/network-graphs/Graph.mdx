@@ -1,0 +1,136 @@
+---
+sidebar_position: 1
+---
+
+# Graph
+
+### Description
+
+The `Graph` class epresents directed and undirected graphs with unweighted edges.
+The edge type is by default a `Line`, used for a undirected graph, but can be changed to an `Arrow`, used for a directed graph.
+The layout of the graph is constructed using the underlying `networkx` library, which can be configured using the `layout` and `layout_config` parameters.
+
+#### Constructor Parameters
+
+- `vertices` (list[Hashable], optional): List of vertices in the graph.
+- `edges` (list[tuple[Hashable, Hashable]], optional): List of edges connecting the vertices.
+- `layout` (str | dict, default="spring"): Layout algorithm to use, can be one of "circular", "kamada_kawai", "planar", "random", "shell", "spectral", "partite", "tree", "spiral", or "spring".
+- `layout_scale` (float | tuple, default=2): Factor to scale the layout.
+- `layout_config` (dict, optional): Configuration for the layout algorithm.
+- `vertex_type` (type[Mobject], default=Dot): Type of mobject to use for vertices.
+- `vertex_config` (dict, default={}): Configuration for the vertex mobjects. Typically includes `radius` and `fill_color` args.
+- `edge_type` (type[Mobject], default=Line): Type of mobject to use for edges.
+- `edge_config` (dict, default={}): Configuration for the edge mobjects.
+- `include_vertex_labels` (bool, default=False): Whether to include labels for vertices.
+- `vertex_label_config` (dict, default={}): Configuration for the vertex labels.
+- `partitions` (list[list[Hashable]], optional): List of partitions for the vertices.
+- `root_vertex` (Hashable, optional): Root vertex for certain layouts.
+- `kwargs` (dict): Additional arguments for `TransformableMobject`.
+
+#### Attributes
+
+- `vertices` (dict): A dictionary mapping hashable vertex values (e.g. 0) to the corresponding mobject vertex (e.g. a Dot).
+- `edges` (dict): A dictionary mapping a hashable edge tuple (e.g. (0, 2)) to the corresponding mobject edge (e.g. a Line).
+- `vertex_labels` (Group | None): Group of Text mobjects representing vertex labels. Empty if no labels exist.
+
+#### Methods
+
+- `from_adjacency_list(graph: AdjacencyListGraph) -> Tuple[List[Hashable], List[Tuple[Hashable, Hashable]]]`: Creates vertices and edges from an adjacency list.
+
+### Examples
+
+#### Example 1
+
+A simple graph, with "circular layout" and vertex labels
+
+```python
+from smanim import *
+
+vertices = [0, 1, 2, 3, 4]
+edges = [(0, 1), (1, 2), (1, 3), (2, 3), (3, 0), (3, 4)]
+graph = Graph(
+    vertices=vertices, edges=edges, layout="circular", include_vertex_labels=True
+)
+canvas.add(graph)
+canvas.draw(crop=True)
+```
+
+<img
+  src="/img/network-graphs/graph/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+A graph with a start vertex colored and labeled, with its outgoing edges colored
+
+```python
+from smanim import *
+
+vertices = [0, 1, 2, 3, 4]
+edges = [(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (4, 0)]
+
+start_vertex = 0
+
+graph = Graph(
+    vertices=vertices,
+    edges=edges,
+    edge_type=Arrow,
+    include_vertex_labels=True,
+    layout_config={"seed": 0},
+)
+
+start_vertex_mob = graph.vertices[start_vertex]
+start_vertex_mob.set_color(RED)
+start_label = Text("Start", color=RED).next_to(start_vertex_mob)
+
+for edge in graph.edges:
+    if edge[0] == start_vertex:
+        graph.edges[edge].set_color(RED)
+
+canvas.add(graph, start_label)
+canvas.draw(crop=True)
+```
+
+<img
+  src="/img/network-graphs/graph/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 3
+
+A graph created from an adjacency list. Also styled with custom coloring.
+
+```python
+from smanim import *
+
+graph = {
+    0: [1, 2],
+    1: [2, 3, 4],
+    2: [5],
+    3: [4],
+    4: [2, 5, 6],
+    5: [],
+    6: [3, 5],
+}
+vertices, edges = Graph.from_adjacency_list(graph)
+vgraph = Graph(
+    vertices,
+    edges,
+    layout_config={"seed": 2},
+    vertex_config={"radius": 0.2, "fill_color": DARK_GRAY},
+    edge_type=Arrow,
+    edge_config={"color": BLUE},
+    include_vertex_labels=True,
+)
+canvas.add(vgraph)
+canvas.draw(crop=True)
+```
+
+<img
+  src="/img/network-graphs/graph/ex3.svg"
+  alt="Example 3"
+  style={{ width: "20rem", height: "auto" }}
+/>

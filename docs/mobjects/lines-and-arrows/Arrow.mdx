@@ -1,0 +1,80 @@
+---
+sidebar_position: 2
+---
+
+# Arrow
+
+### Description
+
+The `Arrow` class inherits from `TipableLine`, representing an arrow with optional tips at either end.
+The default arrow has a tip only at the true "end" and has a drawing style with color set to WHITE.
+
+#### Constructor Parameters
+
+- `start` (Point3D | Mobject, default=LEFT): Starting point or Mobject.
+- `end` (Point3D | Mobject, default=RIGHT): Ending point or Mobject.
+- `buff` (float, default=0.0): Buffer distance from the start and end points. Positive buffs cause the arrow to shorten.
+- `tip_length` (float, default=0.2): Length of the arrow tip.
+- `tip_width` (float, default=0.2): Width of the arrow tip.
+- `tip_scalar` (float, default=1.0): Scale factor for the tip size.
+- `tip_shape` (class, default=ArrowTriangleFilledTip): Shape class for the arrow tip.
+- `at_start` (bool, default=False): Whether to add a tip at the start.
+- `at_end` (bool, default=True): Whether to add a tip at the end.
+- `tip_config` (dict): Additional configuration for the tips.
+- `kwargs` (dict): Additional arguments for `TipableLine`.
+
+#### Attributes
+
+- `start` (Point3D): Starting point of the arrow.
+- `end` (Point3D): Ending point of the arrow.
+- `length` (float): Length of the arrow.
+- `midpoint` (Point3D): Midpoint of the arrow.
+- `direction` (Point3D): Direction vector of the arrow.
+- `angle` (Point3D): Angle of the arrow, in radians.
+- `start_tip` (Mobject | None): Tip at the starting point.
+- `end_tip` (Mobject | None): Tip at the ending point.
+
+#### Methods
+
+- `points_at(cls, mobject_or_point: Mobject | Point3D, direction: Vector3 = DOWN, length: float = 1.0, buff: float = TINY_BUFF, **arrow_config) -> Arrow`: Class method that creates an arrow pointing at the given mobject or point in the specified direction.
+
+### Examples
+
+#### Example 1
+
+An arrow between two mobjects.
+
+```python
+from smanim import *
+
+circle = Circle()
+square = Square().shift(UP * 2 + LEFT * 3)
+arrow = Arrow(start=circle, end=square, color=RED, buff=0.1)
+canvas.add(circle, square, arrow)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/lines-and-arrows/arrow/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+An arrow pointing at a corner of a square.
+
+```python
+from smanim import *
+
+square = Square()
+arrow = Arrow.points_at(square.get_corner(LEFT + UP), color=RED, length=0.5)
+canvas.add(square, arrow)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/lines-and-arrows/arrow/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

@@ -1,0 +1,40 @@
+---
+sidebar_position: 1
+---
+
+# Still Manim Intro
+
+still-manim, or `smanim`, is a python library for drawing static graphics of conceptual content in domains like math and programming.
+It's based on 3blue1brown's animation library, [manim](https://github.com/3b1b/manim), except it is designed for static graphics and for running in the browser.
+
+Try it in the [web editor](idraw.chat)!
+There, you can also see a few examples to get a feel for the the library.
+
+### Running Locally
+
+If you prefer to work locally, install still-manim with pip:
+
+```bash
+pip install smanim
+```
+
+Create a new file with a simple program:
+
+```python title="hello_world.py"
+from smanim import *
+
+c = Circle(stroke_color=RED)
+t = Text("Hello World")
+t.next_to(c, UP)
+canvas.add(c, t)
+# canvas.draw() # use this command when in the browser
+canvas.snapshot(preview=True) # use this command when local
+```
+
+And run the program to generate the diagram and preview it:
+
+```python
+python3 hello_world.py
+```
+
+<img src="/img/hello-world.svg" alt="Hello World Circle" style={{ width: '30rem', height: 'auto' }} />

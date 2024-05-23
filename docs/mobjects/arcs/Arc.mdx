@@ -1,0 +1,68 @@
+---
+sidebar_position: 2
+---
+
+# Arc
+
+### Description
+
+The `Arc` class, which inherits from `VMobject`, represents an arc.
+The default drawing style for an Arc is a stroke rather than a fill.
+
+#### Constructor Parameters
+
+- `radius` (float, default=1.0): Radius of the arc.
+- `start_angle` (float, default=0.0): Starting angle of the arc.
+- `angle` (float, default=TAU / 4): Angle subtended by the arc.
+- `arc_center` (Point3D, default=ORIGIN): Center point of the arc.
+- `kwargs` (dict): Additional arguments for `VMobject`.
+
+#### Attributes
+
+- `radius` (float): Radius of the arc.
+- `arc_center` (Point3D): Center point of the arc.
+- `start_angle` (float): Starting angle of the arc.
+- `angle` (float): Angle subtended by the arc.
+
+#### Methods
+
+- `from_points(cls, start: Point3D, end: Point3D, angle: float | None = None, radius: float = 1.0, **kwargs) -> Arc`: Class method that creates an arc from the given start and end points. If `angle` is specified, it defines the arc; otherwise, `radius` is used to determine the arc.
+
+Examples
+
+#### Example 1
+
+An arc with a custom radius and angle.
+
+```python
+from smanim import *
+
+a = Arc(radius=1.5, angle=3 * TAU / 4)
+canvas.add(a)
+canvas.draw(crop=True, ignore_bg=True)
+# canvas.snapshot(preview=True, crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/arcs/arc/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+An arc created from start and end points. Styled with a fill instead of the default stroke.
+
+```python
+from smanim import *
+
+arc_from_points = Arc.from_points(start=LEFT, end=UP, angle=TAU / 4, fill_color=RED)
+canvas.add(arc_from_points)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/arcs/arc/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

@@ -1,0 +1,43 @@
+---
+sidebar_position: 5
+---
+
+# Rectangle
+
+### Description
+
+The `Rectangle` class, which inherits from `Polygon`, represents a rectangle.
+The default drawing style for a rectangle is a fill rather than a stroke.
+
+#### Constructor Parameters
+
+- `width` (float, default=2.0): Width of the rectangle.
+- `height` (float, default=1.0): Height of the rectangle.
+- `kwargs` (dict): Additional arguments for `Polygon`.
+  - `corner_radius` (float, default=0.0): Radius for rounding corners.
+
+#### Attributes
+
+- `width` (float): Width of the rectangle.
+- `height` (float): Height of the rectangle.
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+
+### Examples
+
+#### Example 1
+
+A rectangle with custom width and height.
+
+```python
+from smanim import *
+
+rect = Rectangle(width=3, height=1)
+canvas.add(rect)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/rectangle/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>

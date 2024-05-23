@@ -1,0 +1,93 @@
+---
+sidebar_position: 2
+requires: ["Graph"]
+# TODO: Figure out if you need path or what here.
+---
+
+# Weighted Graph
+
+### Description
+
+The `WeightedGraph` class inherits from `Graph` and includes functionality for adding edge labels (weights).
+
+#### Constructor Parameters
+
+- `args`: All args including `vertices` and `edges` to be passed to the superclass `Graph`.
+- `edge_labels` (Dict[Tuple[Hashable, Hashable], Text | str | int] | None): map from hashable edge tuple (u, v) => Text.
+- `edge_label_config` (Dict): kwargs for `Text` edge label.
+- `kwargs` (dict): Additional arguments for `Graph`.
+
+#### Attributes
+
+- all the atributes inherited from `Graph` including `vertices` and `edges`
+- `edge_labels` (dict[Tuple[Hashable, Hashable], Text]): map from hashable edge tuple (u, v) => Text.
+
+#### Methods
+
+- `from_adjacency_list(graph: WeightedAdjacencyListGraph) ->  List[Hashable], List[Tuple[Hashable, Hashable]], Dict[Tuple[Hashable, Hashable], Hashable]`: Creates vertices, edges, and a labels map (mapping edge (u, v) to weight w) from an adjacency list.
+
+### Examples
+
+#### Example 1
+
+A simple undirected weighted graph.
+
+```python
+from smanim import *
+
+vertices = [0, 1, 2, 3, 4]
+edges = [(0, 1), (0, 2), (1, 2), (2, 3), (3, 4), (4, 0)]
+edge_labels = {edge: i for i, edge in enumerate(edges)}
+graph = WeightedGraph(
+    vertices,
+    edges,
+    edge_labels=edge_labels,
+    layout="circular",
+    include_vertex_labels=True,
+)
+canvas.add(graph)
+canvas.draw(crop=True)
+```
+
+<img
+  src="/img/network-graphs/weighted-graph/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+A weighted directed graph from an adjacency list representation.
+
+```python
+from smanim import *
+
+graph = {
+    0: [(1, 2), (2, 1)],
+    1: [(2, 5), (3, 11), (4, 3)],
+    2: [(5, 15)],
+    3: [(4, 2)],
+    4: [(2, 1), (5, 4), (6, 5)],
+    5: [],
+    6: [(3, 1), (5, 1)],
+}
+
+vertices, edges, edge_labels = WeightedGraph.from_adjacency_list(graph)
+graph = WeightedGraph(
+    vertices,
+    edges,
+    vertex_config={"fill_color": GRAY, "radius": 0.2},
+    edge_labels=edge_labels,
+    edge_type=Arrow,
+    layout_config={"seed": 0},
+    include_vertex_labels=True,
+)
+canvas.add(graph)
+canvas.draw(crop=True)
+```
+
+<img
+  src="/img/network-graphs/weighted-graph/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

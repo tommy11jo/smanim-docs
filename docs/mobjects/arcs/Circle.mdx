@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+---
+
+# Circle
+
+### Description
+
+The `Circle` class, which inherits from `Arc`, represents a circle.
+The default drawing style for a Circle is a fill rather than a stroke.
+
+#### Constructor Parameters
+
+- `radius` (float, default=1.0): Radius of the circle.
+- `kwargs` (dict): Additional arguments for `Arc`.
+
+#### Attributes
+
+- `radius` (float): Radius of the circle.
+
+### Examples
+
+#### Example 1
+
+A circle with a custom radius.
+
+```python
+from smanim import *
+
+c = Circle(radius=1.5)
+canvas.add(c)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/arcs/circle/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>

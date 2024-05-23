@@ -1,0 +1,46 @@
+---
+sidebar_position: 3
+---
+
+# Triangle
+
+### Description
+
+The `Triangle` class, which inherits from `RegularPolygon`, represents a triangle.
+The default drawing style for a triangle is a fill rather than a stroke.
+
+#### Constructor
+
+##### `Triangle(side_length: float = 2.0, **kwargs)`
+
+Initializes a `Triangle`.
+
+- `side_length` (float, default=2.0): Side length of the triangle.
+- `kwargs` (dict): Additional arguments for `RegularPolygon`.
+  - `corner_radius` (float, default=0.0): Radius for rounding corners.
+
+#### Attributes
+
+- `radius` (float): Radius of the circumscribed circle (half of the side length).
+- `start_angle` (float | None): Starting angle of the first vertex in radians.
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+
+### Examples
+
+#### Example 1
+
+The default triangle.
+
+```python
+from smanim import *
+
+triangle = Triangle()
+canvas.add(triangle)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/triangle/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>

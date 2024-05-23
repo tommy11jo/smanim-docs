@@ -1,0 +1,45 @@
+---
+sidebar_position: 4
+---
+
+# Square
+
+### Description
+
+The `Square` class, which inherits from `Polygon`, represents a square.
+The default drawing style for a square is a fill rather than a stroke.
+
+#### Constructor
+
+##### `Square(side_length: float = 2, **kwargs)`
+
+Initializes a `Square`.
+
+- `side_length` (float, default=2.0): Length of the square's sides.
+- `kwargs` (dict): Additional arguments for `Polygon`.
+  - `corner_radius` (float, default=0.0): Radius for rounding corners.
+
+#### Attributes
+
+- `side_length` (float): Length of the square's sides.
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+
+### Examples
+
+#### Example 1
+
+A square with a custom side length.
+
+```python
+from smanim import *
+
+s = Square(side_length=1)
+canvas.add(s)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/square/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>

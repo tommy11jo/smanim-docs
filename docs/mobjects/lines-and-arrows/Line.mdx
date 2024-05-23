@@ -1,0 +1,98 @@
+---
+sidebar_position: 1
+---
+
+# Line
+
+### Description
+
+The `Line` class inherits from `VMobject`, representing a line segment between two points or Mobjects.
+The default drawing style for a line is a stroke with the color WHITE. A line cannot be "filled".
+
+#### Constructor Parameters
+
+- `start` (Point3D | Mobject, default=LEFT): Starting point or Mobject.
+- `end` (Point3D | Mobject, default=RIGHT): Ending point or Mobject.
+- `buff` (float, default=0.0): Buffer distance from the start and end points. Positive buffs cause the line to shorten.
+- `kwargs` (dict): Additional arguments for `VMobject`.
+
+#### Attributes
+
+- `start` (Point3D): Starting point of the line.
+- `end` (Point3D): Ending point of the line.
+- `length` (float): Length of the line.
+- `midpoint` (Point3D): Midpoint of the line.
+- `direction` (Point3D): Direction vector of the line.
+- `angle` (Point3D): Angle of the line, in radians.
+
+### Examples
+
+#### Example 1
+
+A line between two points with custom color
+
+```python
+from smanim import *
+
+line = Line(start=LEFT + DOWN, end=RIGHT + UP, color=RED)
+canvas.add(line)
+canvas.snapshot(preview=True, crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/lines-and-arrows/line/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+A line between two mobjects.
+
+```python
+from smanim import *
+
+d1 = Dot(LEFT + DOWN, color=BLUE)
+d2 = Dot(RIGHT + UP, color=BLUE)
+line = Line(start=d1, end=d2, color=RED)
+canvas.add(d1, d2, line)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/lines-and-arrows/line/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 3
+
+A kite with a line segment between a vertex and a side's midpoint.
+
+```python
+from smanim import *
+
+vertices = [UP * 2, RIGHT + UP, DOWN * 2, LEFT + UP]
+
+kite = Polygon(vertices, stroke_color=GRAY)
+
+bottom_midpoint = (vertices[2] + vertices[3]) / 2
+start_vertex = Dot(vertices[0], color=DARK_GRAY)
+start_label = Text("A", color=DARK_GRAY).next_to(start_vertex, UP)
+end_vertex = Dot(bottom_midpoint, color=DARK_GRAY)
+end_label = Text("B", color=DARK_GRAY).next_to(end_vertex, LEFT)
+
+bisecting_line = Line(start=start_vertex, end=end_vertex, color=RED, stroke_width=2.0)
+line_label = Text("10", color=DARK_GRAY).next_to(bisecting_line.midpoint, RIGHT)
+
+canvas.add(
+    kite, bisecting_line, start_vertex, end_vertex, start_label, end_label, line_label
+)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/lines-and-arrows/line/ex3.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

@@ -1,0 +1,63 @@
+---
+sidebar_position: 1
+---
+
+# Polygon
+
+### Description
+
+The `Polygon` class, which inherits from `Polygram`, represents a polygon with optional rounded corners.
+The default drawing style for a polygon is a fill rather than a stroke.
+
+#### Constructor Parameters
+
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+- `corner_radius` (float, default=0.0): Radius for rounding corners.
+
+#### Attributes
+
+- `vertices` (Point3D_Array): Array of vertex points, where the units are manim coordinates.
+- `corner_radius` (float): Radius for rounding corners.
+
+#### Methods
+
+- `round_corners(radius: float) -> None`: Rounds the polygon's corners by reducing existing lines and inserting arcs. Only handles convex shapes with counter-clockwise orientation.
+
+### Examples
+
+#### Example 1
+
+An irregular triangle, with its corner radius set.
+
+```python
+from smanim import *
+
+# Note: specified vertices must be counter-clockwise to use corner-radius
+p = Polygon([RIGHT, LEFT + UP, LEFT], corner_radius=0.3)
+canvas.add(p)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/polygon/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+A concave pentagon.
+
+```python
+from smanim import *
+
+p = Polygon([LEFT, LEFT + DOWN, DOWN * 0.5, RIGHT + DOWN, RIGHT])
+canvas.add(p)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/polygons/polygon/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>
