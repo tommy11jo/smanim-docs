@@ -11,7 +11,7 @@ It's based on 3blue1brown's animation library, [manim](https://github.com/3b1b/m
 
 #### Details
 
-Try it in the [web editor](idraw.chat)!
+Try it in the [web editor](https://idraw.chat)!
 There, you can also see a few examples to get a feel for the the library.
 
 ### Running Locally
