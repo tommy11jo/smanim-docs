@@ -1,41 +1,27 @@
 # Website
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+[Docs](https://smanim-docs.vercel.app) for [smanim](https://github.com/tommy11jo/still-manim), a python library for creating diagrams that is based on manim. You can try it on the [web editor](https://idraw.chat).
 
-### Installation
+These docs also serve the `.mdx` files for each page at `api/mdx/{slug}`. These files are important for providing context for the LLM that edits diagrams on the web editor. I could have just copied and pasted all the files but this is cooler (even if slightly slower). It's also a look into what LLM-first documentation should look like (see more on that topic [here](https://smanim-docs.vercel.app/docs/extras/Documentation)).
 
-```
-$ yarn
-```
+Built with [Docusaurus](https://docusaurus.io/) and deployed on Vercel.
 
-### Local Development
+# Development
 
-```
-$ yarn start
-```
+To run locally:
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+```shell
+npm run start
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+To build the docusaurus site and copy all files with a `.mdx` suffix into the `build/mdx/` folder:
 
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
+```shell
+npm run build
 ```
 
-Not using SSH:
+To test the vercel serverless function for serving mdx files:
 
+```shell
+vercel dev
 ```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
