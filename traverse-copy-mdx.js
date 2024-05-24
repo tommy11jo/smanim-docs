@@ -11,6 +11,8 @@ function ensureDirSync(dir) {
   }
 }
 
+let positionCounter = 1
+
 function traverseAndCopyMdxFiles(dir) {
   const files = fs.readdirSync(dir)
   files.forEach((file) => {
@@ -21,11 +23,13 @@ function traverseAndCopyMdxFiles(dir) {
       traverseAndCopyMdxFiles(filePath)
     } else if (file.endsWith(".mdx")) {
       const content = fs.readFileSync(filePath, "utf8")
-      const { data } = matter(content)
+      const { data, content: mdxContent } = matter(content)
 
       if (data.slug) {
+        data.overview_position = positionCounter++
+        const newContent = matter.stringify(mdxContent, data)
         const newFilePath = path.join(buildMdxDir, `${data.slug}.mdx`)
-        fs.writeFileSync(newFilePath, content)
+        fs.writeFileSync(newFilePath, newContent)
       }
     }
   })
