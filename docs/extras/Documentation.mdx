@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+title: "About these Docs"
+---
+
+# About these Docs
+
+This isn't your standard documentation.
+It's not designed for you or any other _human_ user.
+Incidentally, it might work for you, but it's designed for LLMs.
+(Really, it's designed for me to easily create a program for passing relevant sections of the docs to the LLM.)
+
+I built a [web editor](idraw.chat) for creating diagrams that has a feature for the user to describe an instruction in natural language and an LLM will edit the diagram code to complete it.
+The problem is that the LLM doesn't know the ins and outs of the new library `smanim`, which is not in the weights.
+It has some knowledge of `manim`, which is very similar, but it runs into trouble there too.
+
+One solution is RAG, injecting sections of this documentation into the LLM context.
+The typical approach to RAG operates on vast amounts of text and retrieval uses embedding lookup.
+Because my docs are relatively small, retrieval can use an LLM itself.
+
+The LLM will be provided with an overview of the entire documentation, which it will use to request specific sections.
+It's hard to construct this overview with standard documentation, which might not have a consistent structure that can be parsed directly into a good overview for the LLM.
+The overview will be structured as a markdown file, with a nested bullet point list of category and page names.
+
+Each category can include metadata such as the contents of `Overview.mdx` of each category, if it exists.
+
+Each page can include metadata such as the brief description of the page (after the heading labeled "description" and before the next heading) and the description of each example on the page (after the heading "Example x" and before the code block)
+
+Using this overview, the LLM will then request a few _pages_ that it would like to see completely.
+Pages are a relatively large granularity and a more complex approach could permit LLM requests for finer-grained resources, like a specific example or a specific description.
+
+Related: https://docs.kapa.ai/blog/optimizing-technical-documentation-for-llms

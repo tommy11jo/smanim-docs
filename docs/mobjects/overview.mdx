@@ -1,0 +1,25 @@
+---
+sidebar_position: 0
+---
+
+# Overview
+
+Mobjects in `smanim` are Python objects that represent different components in the diagram.
+Examples of common mobject classes include `Square`, `Text`, `Group`, and `Graph` mobjects.
+While similar to mobjects in Manim, smanim mobjects have minor variations in their function names and parameters.
+
+- Mobjects can be copied (e.g. `mob2 = mob1.copy()`).
+- Mobjects can be layered via z_index.
+
+  - Set the z_index manually (e.g. `s = Square(z_index=2))`.
+  - Or use higher-level functions (e.g.`group.bring_to_front(mob_in_group)` or `group.bring_to_back(mob_in_group)`).
+  - The default z_index of all mobjects is 0 besides text mobjects which are 1.
+
+- Mobjects can be spatially transformed (e.g. `scale` or `shift`).
+- Mobjects can be spatially related (e.g. `mob1.next_to(mob2)`).
+- Mobjects can be styled with `set_color` or `set_opacity`.
+
+  - Note that VMobjects, or vectorized mobjects, can be styled with `set_fill(color, opacity)` or `set_stroke(color, opacity)`.
+
+- Mobjects have a center and an 8 point bounding box (4 corners, 4 edge midpoints).
+- Mobjects can have submobjects (e.g. `square.add(Text("Square"))`), though creating a `Group` should be preferred.

@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+---
+
+# Group
+
+### Description
+
+A `Group` is a `Mobject` that can contain others mobjects, including sub-groups.
+Groups have additional spatial relationships for arranging their submobjects in a row, column, or grid, which are covered on this page.
+
+#### Details
+
+Groups are used for clear organization of related items.
+Mobjects by default can add submobjects with `mob1.add(mob2)` but that should be used sparingly.
+
+#### Constructor Parameters
+
+- `mobjects` (tuple): Mobjects to add to the group.
+- `kwargs` (dict): Additional arguments for `TransformableMobject`.
+
+#### Attributes
+
+- `submobjects` (List[Mobject]): List of mobjects contained in the group.
+
+#### Methods
+
+- `add(*mobjects: Mobject, insert_at_front: bool = False) -> Self`: Adds mobjects to the group.
+- `set_color(color: ManimColor, family: bool = True) -> Self`: Sets the color of the group and its submobjects.
+- `set_opacity(opacity: float, family: bool = True) -> Self`: Sets the opacity of the group and its submobjects.
+- `arrange(direction: Vector3 = RIGHT, aligned_edge: Vector3 = ORIGIN, buff: float = DEFAULT_MOBJECT_TO_MOBJECT_BUFFER, center: bool = True) -> Self`: Arranges the submobjects in a specified direction.
+- `arrange_in_grid(num_rows: int | None = None, num_cols: int | None = None, aligned_edge_within_row: Vector3 = UP, aligned_edge_within_col: Vector3 = LEFT, row_direction: Vector3 = RIGHT, col_direction: Vector3 = DOWN, buff_within_row: float = DEFAULT_MOBJECT_TO_MOBJECT_BUFFER, buff_within_col: float = DEFAULT_MOBJECT_TO_MOBJECT_BUFFER, buff: float | None = None) -> Self`: Arranges the submobjects in a grid.
+
+### Examples
+
+#### Example 1
+
+Create a group with a square, an arrow, and a text label and set the group's color
+
+```python
+from smanim import *
+
+square = Square()
+arrow = Arrow.points_at(square.get_corner(UR))
+group = Group(square, arrow)
+label = Text("Upper right").next_to(arrow, UP)
+group.add(label) # Just for demo of `add` function, label should be included in constructor here
+group.set_color(GRAY)
+canvas.add(group)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/group/ex1.svg"
+  alt="Example 1"
+  style={{ width: "10rem", height: "auto" }}
+/>
+#### Example 2
+
+Create a group of 8 squares with different opacities and put them in a grid with 2 rows and 4 cols
+
+```python
+from smanim import *
+
+squares = [Square(color=GRAY, opacity=i / 8) for i in range(8)]
+group = Group(*squares)
+group.arrange_in_grid(num_rows=2, num_cols=4)
+canvas.add(group)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/group/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

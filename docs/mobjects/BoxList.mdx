@@ -1,0 +1,64 @@
+---
+sidebar_position: 7
+---
+
+# Box List
+
+### Description
+
+The `BoxList` class is a specialized `Group` that places each of its submobjects in a rectangle with a default white outline and arranges them in a row or a column.
+A common use case is showing a list of numbers or values in programming.
+
+#### Constructor Parameters
+
+- `mobjects` (tuple): Mobjects to add to the BoxList.
+- `direction` (Vector3, default=RIGHT): Direction in which to arrange the mobjects.
+- `aligned_edge` (Vector3, default=None): Edge to align the mobjects.
+- `x_padding` (str, default=SMALL_BUFF): Horizontal padding between mobjects.
+- `y_padding` (float, default=SMALL_BUFF): Vertical padding between mobjects.
+- `line_config` (dict): Configuration dictionary for the line. The most common params to change here are `color` and `stroke_width`.
+- `kwargs` (dict): Additional arguments for `Group`.
+
+#### Methods
+
+- Inherits methods from `Group`.
+
+### Examples
+
+#### Example 1
+
+A horizontal box list where the items are squares of varying opacity
+
+```python
+from smanim import *
+
+squares = [Square(color=DARK_GRAY, opacity=(i + 1) / 4) for i in range(4)]
+box_list = BoxList(*squares, direction=RIGHT, x_padding=MED_SMALL_BUFF, line_config={"color": GRAY})
+canvas.add(box_list)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/box-list/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+A horizontal box list of numbers (e.g. for teaching a sorting algorithm)
+
+```python
+from smanim import *
+
+nums = [Text(str(val), color=GRAY) for val in [3, 8, 7, -1, 10, 5]]
+box_list = BoxList(*nums, direction=RIGHT, x_padding=MED_SMALL_BUFF, line_config={"color": GRAY})
+canvas.add(box_list)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/box-list/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>

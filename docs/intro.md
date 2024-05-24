@@ -4,8 +4,12 @@ sidebar_position: 1
 
 # Still Manim Intro
 
+### Description
+
 still-manim, or `smanim`, is a python library for drawing static graphics of conceptual content in domains like math and programming.
 It's based on 3blue1brown's animation library, [manim](https://github.com/3b1b/manim), except it is designed for static graphics and for running in the browser.
+
+#### Details
 
 Try it in the [web editor](idraw.chat)!
 There, you can also see a few examples to get a feel for the the library.

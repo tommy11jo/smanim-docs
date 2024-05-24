@@ -1,0 +1,35 @@
+---
+sidebar_position: 1
+---
+
+# Bounding Boxes
+
+Every mobject has a "bounding box", which is the smallest rectangle that surrounds it completely.
+
+#### Details
+
+Under the hood, spatial relations use the bounding boxes of the mobjects in the operation.
+These same operations are commonly useful for adding labels or arrows or dots at specific locations on the bbox.
+The "complete" bounding box is represented as 9 points: 4 corners, 4 edge points, and 1 center.
+
+<img
+  src="/img/spatial-relations/bbox-ex1.svg"
+  alt="Bounding Box"
+  style={{ width: "10rem", height: "auto" }}
+/>
+
+The bounding box points for a mobject can be accessed in the following ways:
+
+- `mobject.right`: the midpoint on the right edge
+- `mobject.left`: the midpoint on the left edge
+- `mobject.top`: the midpoint on the top edge
+- `mobject.bottom`: the midpoint on the bottom edge
+- `mobject.center`: the center of the bbox
+- `mobject.get_corner(UR)`: upper right corner
+- `mobject.get_corner(UL)`: upper left corner
+- `mobject.get_corner(DL)`: down (lower) left corner
+- `mobject.get_corner(DR)`: down (lower) right corner
+
+These operations return a `Point3D` (e.g. [1, 0, 0])
+
+The width and height of the bbox can also be accessed as `mobject.width` and `mobject.height` respectively.

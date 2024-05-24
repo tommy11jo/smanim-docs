@@ -1,0 +1,91 @@
+---
+sidebar_position: 5
+title: "Spatial Transformations"
+---
+
+# Spatial Transformations
+
+### Description
+
+Spatial transformations are used to transform a mobject in space.
+They typically operate as affine transformations to scale, shift, stretch, or rotate the mobject.
+
+#### Details
+
+All mobjects to date inherit from `TransformableMobject`, where these methods live.
+However, some classes like `Text` override these transformation functions to provide more sensible defaults (e.g., Rotated text should rotate in space but remain upright by default).
+
+#### Methods
+
+- `rotate(angle: float = PI / 4, axis: Vector3 = OUT, about_point: Point3D | None = ORIGIN) -> Self`: Rotates the mobject by a specified angle around a given axis and about a specific point. By default, rotates about the 2D origin, which is the center of the canvas.
+- `scale(factor: float, about_point: Point3D = ORIGIN) -> Self`: Scales the mobject by a given factor about a specified point. The center of the mobject does not change.
+- `stretch(factor: float, dim: int) -> Self`: Stretches the mobject by a specified factor along a given dimension. The center of the mobject does not change.
+- `shift(vector: Vector3) -> Self`: Shifts (or translates) the mobject by a specified vector.
+- `stretch_to_fit_width(width: float) -> Self`: Stretches the mobject to fit a specified width.
+- `stretch_to_fit_height(height: float) -> Self`: Stretches the mobject to fit a specified height.
+- `scale_to_fit_width(width: float) -> Self`: Scales the mobject to fit a specified width.
+- `scale_to_fit_height(height: float) -> Self`: Scales the mobject to fit a specified height.
+
+### Examples
+
+#### Example 1
+
+Simple scaling of a square
+
+```python
+from smanim import *
+
+square = Square(color=GRAY)
+large_square = Square(color=GRAY).scale(2)
+large_square.next_to(square, RIGHT)
+canvas.add(square, large_square)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/spatial-transformations/ex1.svg"
+  alt="Example 1"
+  style={{ width: "20rem", height: "auto" }}
+/>
+
+#### Example 2
+
+Stretching and rotating a simple number line (which contains vmobjects and text)
+
+```python
+from smanim import *
+
+y_axis = NumberLine()
+y_axis.stretch(0.5, dim=0)
+y_axis.rotate(PI / 8)
+y_axis.set_color(GRAY)
+canvas.add(y_axis)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/spatial-transformations/ex2.svg"
+  alt="Example 2"
+  style={{ width: "20rem", height: "auto" }}
+/>
+#### Example 3
+
+Scaling of a group to fit the width of a text description
+
+```python
+from smanim import *
+
+shape_group = Group(Square(z_index=1, color=GRAY), Circle(color=DARK_GRAY).shift(RIGHT * 0.5))
+label = Text("""Mobjects take layer precedence based their z_index or when their z_indexes are equal the order they are added to the canvas.
+The z_index of a mobject by default is 0.""", color=GRAY)
+shape_group.scale_to_fit_width(label.width)
+label.next_to(shape_group, UP, LEFT)
+canvas.add(shape_group, label)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/spatial-transformations/ex3.svg"
+  alt="Example 3"
+  style={{ width: "20rem", height: "auto" }}
+/>

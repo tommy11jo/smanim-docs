@@ -1,9 +1,9 @@
 {
-  "label": "Arcs",
-  "position": 2,
+  "label": "Extras (Optional)",
+  "position": 7,
   "collapsed": true,
   "link": {
     "type": "generated-index",
-    "slug": "/arcs"
+    "slug": "/extras"
   }
 }
