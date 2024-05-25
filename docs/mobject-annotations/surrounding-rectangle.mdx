@@ -1,0 +1,45 @@
+---
+sidebar_position: 2
+slug: "surrounding-rectangle"
+---
+
+# SurroundingRectangle
+
+### Description
+
+The `SurroundingRectangle` class, which inherits from `Rectangle`, represents a rectangle that surrounds a given `Mobject`.
+It can be applied to emphasize a shape or some text to the user.
+
+#### Constructor Parameters
+
+- `mobject` (Mobject): The object to be surrounded by the rectangle.
+- `stroke_color` (ManimColor, default=GRAY): The color of the rectangle's stroke.
+- `buff` (float, default=SMALL_BUFF): The padding between the `Mobject` and the rectangle.
+- `corner_radius` (float, default=0.0): Radius for rounding corners, in manim units (a reasonable value is often 0.1 to 0.3).
+- `kwargs` (dict): Additional arguments for `Rectangle`.
+
+#### Attributes
+
+- `buff` (float): Padding between the `Mobject` and the rectangle.
+- `surrounded` (Mobject): The `Mobject` that is being surrounded.
+
+### Examples
+
+#### Example 1
+
+A surrounding rectangle around a square with custom padding.
+
+```python
+from smanim import *
+
+square = Square(side_length=2, color=DARK_GRAY)
+surrounding_rect = SurroundingRectangle(square, buff=0.5)
+canvas.add(square, surrounding_rect)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/annotations/surrounding-rectangle/ex1.svg"
+  alt="Example 1"
+  style={{ width: "10rem", height: "auto" }}
+/>

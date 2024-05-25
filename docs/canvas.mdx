@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+slug: "canvas"
+---
+
+# Canvas
+
+### Description
+
+A canvas is what is drawn on.
+Mobjects can be added to the `canvas`: `canvas.add(mobject)`.
+Added mobjects can be drawn: `canvas.draw()`.
+The canvas is constructed using the default `CONFIG`: `canvas = Canvas(CONFIG)` and is available in the global scope.
+
+#### Details
+
+For comparison, a `Square` width by default is 2.
+
+- The default frame height is 8.
+- The default frame height is 14.222.
+- The default frame center is the origin ORIGIN (0, 0, 0).
+- The default background color is BLACK.
+
+#### Attributes
+
+- `mobjects` (Group): mobjects to be drawn
+
+#### Methods
+
+- `add(self, *mobjects: Tuple[Mobject, ...])`
+- `remove(self, *mobjects: Tuple[Mobject, ...])`
+- `draw(self, preview: bool = False, overwrite: bool = False, ignore_bg: bool = False, crop: bool = False, crop_buff: float = SMALL_BUFF)`: used in the browser (most common).
+- `snapshot(self, preview: bool = True, overwrite: bool = False, ignore_bg: bool = False, crop: bool = False, crop_buff: float = SMALL_BUFF)`: use when working locally (less common).
+- `set_background(self, color: ManimColor) -> Canvas`: default bg color is `BLACK`.
+- `set_dimensions(self, width: int, height: int) -> Canvas`: where `width` and `height` are manim units. Often, `crop=True` in `draw()` is preferred because it avoids hardcoding.
+- `set_global_text_styles(self, color: ManimColor | None = None, font_size: int | None = None, font_family: str | None = None) -> Canvas`: sets the default text style for any text mobjects that get created in the future (used to avoid repetition)
+
+### Examples
+
+#### Example 1
+
+Show some text using the global default text color to black (instead of its default, white). Crop and ignore the background on the canvas.
+
+```python
+from smanim import *
+canvas.set_global_text_styles(color=BLACK)
+t = Text("Black text")
+t2 = Text("Red text", color=RED).shift(DOWN)
+canvas.add(t, t1)
+canvas.draw(crop=True, ignore_bg=True)
+```

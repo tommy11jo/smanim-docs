@@ -5,12 +5,13 @@ slug: "mobject-overview"
 
 # Overview
 
-### Mobjects
+#### Mobjects
 
 Mobjects in `smanim` are Python objects that represent different components in the diagram.
 Examples of common mobject classes include `Square`, `Text`, `Group`, and `Graph` mobjects.
 While similar to mobjects in Manim, smanim mobjects have minor variations in their function names and parameters.
 
+- Mobjects by default are positioned at the `ORIGIN` (0, 0, 0).
 - Mobjects can be copied (e.g. `mob2 = mob1.copy()`).
 - Mobjects can be layered via z_index.
 
@@ -27,7 +28,7 @@ While similar to mobjects in Manim, smanim mobjects have minor variations in the
 - Mobjects have a center and an 8 point bounding box (4 corners, 4 edge midpoints).
 - Mobjects can have submobjects (e.g. `square.add(Text("Square"))`), though creating a `Group` should be preferred.
 
-### VMobjects
+#### VMobjects
 
 VMobjects in `smanim` are vectorized mobjects represented spatially by a list of points.
 `Circle`, `Square`, `Arrow`, and any other mobject that doesn't include `Text` is a `VMobject`.
@@ -44,6 +45,6 @@ The relevant params for the `VMobject` constructor:
 
 - `kwargs` (dict): Additional arguments for customization.
 
-#### Usage Example
+##### Usage Example
 
 `Square(stroke_color=RED, dashed=True)`

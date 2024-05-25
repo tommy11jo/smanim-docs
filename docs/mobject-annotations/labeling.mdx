@@ -1,0 +1,43 @@
+---
+sidebar_position: 1
+slug: "labeling"
+---
+
+# Labeling
+
+### Description
+
+`label = mob.create_label("example text")` can be applied to create a `Text` mobject `label` for a mobject `mob`.
+`create_label` should be used as the default way to label mobjects in smanim, since mobject classes like `Line` override `create_label` to provide a custom labeling.
+
+#### Details
+
+This text mobject must still be added to the `canvas`, directly or indirectly.
+
+#### Parameters
+
+- `text` (`str`): The text for the label.
+- `direction` (`Vector3`, default=`UP`): The direction to place the label relative to the target mobject.
+- `buff` (`float`, default=`MED_SMALL_BUFF`): The buffer distance between the label and the target mobject.
+- `use_parent_width` (`bool`, default=`False`): Whether to stretch this label to the the parent mobject's width.
+- `**text_kwargs`: Additional keyword arguments for the `Text` mobject. Common args include `color`, `font_family`, `font_size`.
+
+#### Example 1
+
+Simple text label on a square.
+
+```python
+from smanim import *
+
+square = Square(color=GRAY)
+text = square.create_label("square", color=GRAY, buff=TINY_BUFF)
+
+canvas.add(square, text)
+canvas.draw(crop=True, ignore_bg=True)
+```
+
+<img
+  src="/img/annotations/labeling/ex1.svg"
+  alt="Example 1"
+  style={{ width: "10rem", height: "auto" }}
+/>

@@ -6,8 +6,9 @@ slug: "next-to"
 
 # Next To
 
-The `next_to` function is used to place one mobject next to another mobject, optionally adding buffer and specifying alignment.
+The `next_to` function is used to place one mobject next to another mobject in the specified direction, optionally adding buffer and edge alignment.
 It is the most commonly used spatial relation.
+Use `close_to` instead to avoid collisions with other mobjects that `next_to` might cause, though `close_to` also requires specifying potentially colliding mobjects.
 
 #### Parameters
 
@@ -33,7 +34,7 @@ canvas.draw(crop=True, ignore_bg=True)
 ```
 
 <img
-  src="/img/spatial-relations/next-to-ex1.svg"
+  src="/img/spatial-relations/next-to/ex1.svg"
   alt="Next to Example 1"
   style={{ width: "10rem", height: "auto" }}
 />
@@ -56,7 +57,7 @@ canvas.draw(crop=True, ignore_bg=True)
 ```
 
 <img
-  src="/img/spatial-relations/next-to-ex2.svg"
+  src="/img/spatial-relations/next-to/ex2.svg"
   alt="Next to Example 2"
   style={{ width: "10rem", height: "auto" }}
 />
